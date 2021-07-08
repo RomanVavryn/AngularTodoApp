@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { NotepadComponent } from './notepad/notepad.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { Page404Component } from './page404/page404.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { Page404Component } from './page404/page404.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
