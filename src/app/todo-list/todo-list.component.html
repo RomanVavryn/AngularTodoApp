@@ -1,1 +1,10 @@
-<p>todo-list works!</p>
+<div class="row border">
+  <div class="col-12">
+    <app-todo-new-item></app-todo-new-item>
+    <h3 class="text-center mb-3">Todos:</h3>
+    <app-todo-item
+      *ngFor="let todo of todos; let i = index;"
+      [todoItem]="todo"
+      [index]="i"></app-todo-item>
+  </div>
+</div>
