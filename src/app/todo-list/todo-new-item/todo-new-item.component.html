@@ -1,0 +1,10 @@
+<h3 class="my-2 text-center">New Task</h3>
+<label>Task Title</label>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Title" #taskTitle>
+</div>
+<label>Task Description</label>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Description" #taskDescription>
+</div>
+<button class="btn btn-success" (click)="addNewTask()">Add</button>
