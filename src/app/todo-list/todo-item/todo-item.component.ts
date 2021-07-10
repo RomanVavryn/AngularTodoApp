@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TodosDataInterface} from "../todos-data.interface";
 import {TodosDataService} from "../todos-data.service";
 
