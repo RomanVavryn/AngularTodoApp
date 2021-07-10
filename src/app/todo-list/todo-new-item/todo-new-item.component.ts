@@ -10,6 +10,8 @@ export class TodoNewItemComponent implements OnInit {
   @ViewChild('taskTitle', {static: true}) newTaskTitle: ElementRef | undefined;
   @ViewChild('taskDescription', {static: true}) newTaskDescription: ElementRef | undefined;
 
+  canAdd: boolean = false;
+
   constructor(private taskService: TodosDataService) {
   }
 
@@ -25,9 +27,16 @@ export class TodoNewItemComponent implements OnInit {
         done: false
       }
       this.taskService.newTask(newTask);
-      console.log('add successful')
-    } else {
-      console.log('add failed')
+      // @ts-ignore
+      this.newTaskTitle?.nativeElement.value = '';
+      // @ts-ignore
+      this.newTaskDescription?.nativeElement.value = '';
     }
   }
+
+  canAddTask(): void {
+    this.canAdd = this.newTaskTitle?.nativeElement.value.length > 4 && this.newTaskDescription?.nativeElement.value.length > 4;
+    console.log('change detection')
+  }
+
 }

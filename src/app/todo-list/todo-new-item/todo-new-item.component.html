@@ -1,10 +1,10 @@
 <h3 class="my-2 text-center">New Task</h3>
 <label>Task Title</label>
 <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Title" #taskTitle>
+  <input type="text" class="form-control" placeholder="Title" (input)="canAddTask()" #taskTitle>
 </div>
 <label>Task Description</label>
 <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Description" #taskDescription>
+  <input type="text" class="form-control" placeholder="Description" (input)="canAddTask()" #taskDescription>
 </div>
-<button class="btn btn-success" (click)="addNewTask()">Add</button>
+<button class="btn btn-success" [disabled]="!canAdd" (click)="addNewTask()">Add</button>
