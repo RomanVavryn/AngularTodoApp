@@ -31,6 +31,12 @@ export class TodoNewItemComponent implements OnInit {
       this.newTaskTitle?.nativeElement.value = '';
       // @ts-ignore
       this.newTaskDescription?.nativeElement.value = '';
+      this.canAdd = false;
+      // scroll to bottom page (to new item)
+      // if remove setTimeout scroll will go to penultimate element
+      setTimeout(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      }, 0)
     }
   }
 
