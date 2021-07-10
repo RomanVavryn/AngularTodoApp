@@ -21,7 +21,11 @@ export class TodosDataService {
   }
 
   getLastId(): number {
-    return this.todos.length !== 0 ? this.todos[this.todos.length - 1].id : 1;
+    if (this.todos.length >= 1) {
+      return 1
+    } else {
+      return <number>this.todos[this.todos.length - 1].id
+    }
   }
 
   taskToDone(index: number | undefined): void {
@@ -37,6 +41,12 @@ export class TodosDataService {
 
   newTask(item: TodosDataInterface): void {
     this.todos.push(item);
+  }
+
+  updateItem(index: number | undefined, item: TodosDataInterface): void {
+    if (typeof index === "number") {
+      this.todos.splice(index, 1, item);
+    }
   }
 
 }

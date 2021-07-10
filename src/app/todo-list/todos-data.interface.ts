@@ -1,6 +1,6 @@
 export interface TodosDataInterface {
-  id: number;
-  title: string;
-  description: string;
-  done: boolean;
+  id: number | undefined;
+  title: string | undefined;
+  description: string | undefined;
+  done: boolean | undefined;
 }
