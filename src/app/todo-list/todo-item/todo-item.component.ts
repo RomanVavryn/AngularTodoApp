@@ -14,7 +14,7 @@ export class TodoItemComponent implements OnInit {
   editMode: boolean = false;
   editedTitle: string | undefined
   editedDescription: string | undefined
-
+  CanSave: boolean = false;
   constructor(private todoDataService: TodosDataService) {
   }
 
@@ -29,6 +29,12 @@ export class TodoItemComponent implements OnInit {
 
   deleteTask() {
     this.todoDataService.deleteTask(this.index);
+  }
+
+  canSaveChanges(): void {
+    if (this.editedTitle && this.editedDescription) {
+      this.CanSave = this.editedTitle.trim().length > 4 && this.editedDescription.trim().length > 4;
+    }
   }
 
   saveChanges(): void {

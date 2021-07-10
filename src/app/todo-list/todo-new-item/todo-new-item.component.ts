@@ -35,8 +35,7 @@ export class TodoNewItemComponent implements OnInit {
   }
 
   canAddTask(): void {
-    this.canAdd = this.newTaskTitle?.nativeElement.value.length > 4 && this.newTaskDescription?.nativeElement.value.length > 4;
-    console.log('change detection')
+    this.canAdd = this.newTaskTitle?.nativeElement.value.trim().length > 4 && this.newTaskDescription?.nativeElement.value.trim().length > 4;
   }
 
 }

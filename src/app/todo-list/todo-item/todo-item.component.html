@@ -21,11 +21,20 @@
 <ng-template #editTask>
   <div class="border p-2 mb-2 d-flex ">
     <div class="d-flex flex-column w-50">
-      <input class="mb-2 form-control" type="text" [(ngModel)]="editedTitle" [value]="todoItem?.title">
-      <input class="form-control" type="text" [(ngModel)]="editedDescription" [value]="todoItem?.description">
+      <input class="mb-2 form-control"
+             type="text"
+             [(ngModel)]="editedTitle"
+             [value]="todoItem?.title"
+             (input)="canSaveChanges()">
+      <input class="form-control"
+             type="text"
+             [(ngModel)]="editedDescription"
+             [value]="todoItem?.description"
+             (input)="canSaveChanges()">
     </div>
     <button class="btn btn-info ml-3"
-            (click)="saveChanges()">Save
+            (click)="saveChanges()"
+            [disabled]="!CanSave">Save
     </button>
   </div>
 </ng-template>
