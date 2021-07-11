@@ -1,5 +1,5 @@
 # Simple Angular Todo List Application
-Currently, is first version of my notepad app in future im will make it better
+Currently, is first version of my todo list app in future im will make it better
 
 author: Roman Vavrynkevych
 
