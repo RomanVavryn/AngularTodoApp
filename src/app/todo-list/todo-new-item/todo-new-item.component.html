@@ -1,10 +1,41 @@
 <h3 class="my-2 text-center">New Task</h3>
-<label>Task Title</label>
-<div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Title" (input)="canAddTask()" #taskTitle>
-</div>
-<label>Task Description</label>
-<div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Description" (input)="canAddTask()" #taskDescription>
-</div>
-<button class="btn btn-success" [disabled]="!canAdd" (click)="addNewTask()">Add</button>
+<form (ngSubmit)="addNewTask()" [formGroup]="newTaskForm!">
+
+  <div class="form-group mb-3">
+    <label for="taskTitle">Task Title</label>
+    <input type="text" name="taskTitle" id="taskTitle" class="form-control"
+           [class.is-invalid]="newTaskForm?.get('taskTitle')?.invalid && newTaskForm?.get('taskTitle')?.touched"
+           [class.is-valid]="newTaskForm?.get('taskTitle')?.valid && newTaskForm?.get('taskTitle')?.touched"
+           formControlName="taskTitle">
+    <div *ngIf="newTaskForm?.get('taskTitle')?.invalid &&
+        newTaskForm?.get('taskTitle')?.errors &&
+        (newTaskForm?.get('taskTitle')?.dirty || newTaskForm?.get('taskTitle')?.touched)">
+      <small class="form-text "
+             *ngIf="newTaskForm?.get('taskTitle')?.hasError('required') && newTaskForm?.get('taskTitle')?.touched">title is
+        empty!</small>
+      <small class="form-text "
+             *ngIf="newTaskForm?.get('taskTitle')?.hasError('minlength') && newTaskForm?.get('taskTitle')?.touched">title is to small!</small>
+    </div>
+  </div>
+
+  <div class="form-group mb-3">
+    <label for="taskDescription">Task Description</label>
+    <input type="text" name="taskDescription" id="taskDescription" class="form-control"
+           [class.is-invalid]="newTaskForm?.get('taskDescription')?.invalid && newTaskForm?.get('taskDescription')?.touched"
+           [class.is-valid]="newTaskForm?.get('taskDescription')?.valid && newTaskForm?.get('taskDescription')?.touched"
+           formControlName="taskDescription">
+    <div *ngIf="newTaskForm?.get('taskDescription')?.invalid &&
+        newTaskForm?.get('taskDescription')?.errors &&
+        (newTaskForm?.get('taskDescription')?.dirty || newTaskForm?.get('taskDescription')?.touched)">
+      <small class="form-text"
+             *ngIf="newTaskForm?.get('taskDescription')?.hasError('required') && newTaskForm?.get('taskDescription')?.touched">description is
+        empty!</small>
+      <small class="form-text"
+             *ngIf="newTaskForm?.get('taskDescription')?.hasError('minlength') && newTaskForm?.get('taskDescription')?.touched">description is to small!</small>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!newTaskForm?.valid">Add</button>
+
+</form>
+

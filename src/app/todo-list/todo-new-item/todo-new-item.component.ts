@@ -1,5 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TodosDataService} from "../todos-data.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-todo-new-item',
@@ -7,41 +8,32 @@ import {TodosDataService} from "../todos-data.service";
   styleUrls: ['./todo-new-item.component.scss']
 })
 export class TodoNewItemComponent implements OnInit {
-  @ViewChild('taskTitle', {static: true}) newTaskTitle: ElementRef | undefined;
-  @ViewChild('taskDescription', {static: true}) newTaskDescription: ElementRef | undefined;
-
-  canAdd: boolean = false;
+  newTaskForm: FormGroup | undefined;
 
   constructor(private taskService: TodosDataService) {
   }
 
   ngOnInit(): void {
+    this.newTaskForm = new FormGroup({
+      'taskTitle': new FormControl(null, [Validators.required, Validators.minLength(5)]),
+      'taskDescription': new FormControl(null, [Validators.required, Validators.minLength(5)]),
+    })
   }
 
   addNewTask(): void {
-    if (this.newTaskTitle?.nativeElement.value.length > 4 || this.newTaskDescription?.nativeElement.value.length > 4) {
-      const newTask = {
-        id: this.taskService.getLastId() === 1 ? this.taskService.getLastId() : this.taskService.getLastId() + 1,
-        title: this.newTaskTitle?.nativeElement.value,
-        description: this.newTaskDescription?.nativeElement.value,
-        done: false
-      }
-      this.taskService.newTask(newTask);
-      // @ts-ignore
-      this.newTaskTitle?.nativeElement.value = '';
-      // @ts-ignore
-      this.newTaskDescription?.nativeElement.value = '';
-      this.canAdd = false;
-      // scroll to bottom page (to new item)
-      // if remove setTimeout scroll will go to penultimate element
-      setTimeout(() => {
-        window.scrollTo(0, document.body.scrollHeight);
-      }, 0)
+    const newTask = {
+      id: this.taskService.getLastId() === 1 ? this.taskService.getLastId() : this.taskService.getLastId() + 1,
+      title: this.newTaskForm?.get('taskTitle')?.value,
+      description: this.newTaskForm?.get('taskDescription')?.value,
+      done: false
     }
-  }
-
-  canAddTask(): void {
-    this.canAdd = this.newTaskTitle?.nativeElement.value.trim().length > 4 && this.newTaskDescription?.nativeElement.value.trim().length > 4;
+    this.taskService.newTask(newTask);
+    this.newTaskForm?.reset();
+    // scroll to bottom page (to new item)
+    // if remove setTimeout scroll will go to penultimate element
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 0)
   }
 
 }
