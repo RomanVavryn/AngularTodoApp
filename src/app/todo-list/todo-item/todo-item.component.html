@@ -10,31 +10,83 @@
     <span class="mb-2"> Done:</span>
     <input type="checkbox" class="checkbox-big-size" (click)="taskDone()">
   </div>
-  <!-- btn -->
+  <!-- btn,s -->
   <button class="btn btn-info ml-4"
-          (click)="editMode = true"
+          (click)="this.editMode = true"
           [disabled]="todoItem?.done">Edit
   </button>
   <button class="btn btn-danger ml-2" (click)="deleteTask()">Delete</button>
 </div>
-<!-- edit mode -->
+<!-- edit mode old version -->
+<!--<ng-template #editTask>-->
+<!--  <div class="border p-2 mb-2 d-flex ">-->
+<!--    <div class="d-flex flex-column w-50">-->
+<!--      <input class="mb-2 form-control"-->
+<!--             type="text"-->
+<!--             [(ngModel)]="editedTitle"-->
+<!--             [value]="todoItem?.title"-->
+<!--             (input)="canSaveChanges()">-->
+<!--      <input class="form-control"-->
+<!--             type="text"-->
+<!--             [(ngModel)]="editedDescription"-->
+<!--             [value]="todoItem?.description"-->
+<!--             (input)="canSaveChanges()">-->
+<!--    </div>-->
+<!--    <button class="btn btn-info ml-3"-->
+<!--            (click)="saveChanges()"-->
+<!--            [disabled]="!CanSave">Save-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</ng-template>-->
+
+
+<!-- edit mode reactive form version -->
 <ng-template #editTask>
-  <div class="border p-2 mb-2 d-flex ">
-    <div class="d-flex flex-column w-50">
-      <input class="mb-2 form-control"
-             type="text"
-             [(ngModel)]="editedTitle"
-             [value]="todoItem?.title"
-             (input)="canSaveChanges()">
-      <input class="form-control"
-             type="text"
-             [(ngModel)]="editedDescription"
-             [value]="todoItem?.description"
-             (input)="canSaveChanges()">
-    </div>
-    <button class="btn btn-info ml-3"
-            (click)="saveChanges()"
-            [disabled]="!CanSave">Save
-    </button>
+  <div class="border p-2 mb-2">
+    <form [formGroup]="editingForm!" (ngSubmit)="saveChanges()" class="d-flex">
+
+      <div class="w-75">
+
+        <div class="form-group mb-1">
+          <input type="text" name="editedTitle" id="editedTitle" class="form-control"
+                 [class.is-invalid]="editingForm?.get('editedTitle')?.invalid && editingForm?.get('editedTitle')?.touched"
+                 [class.is-valid]="editingForm?.get('editedTitle')?.valid && editingForm?.get('editedTitle')?.touched"
+                 formControlName="editedTitle">
+          <div *ngIf="editingForm?.get('editedTitle')?.invalid &&
+        editingForm?.get('editedTitle')?.errors &&
+        (editingForm?.get('editedTitle')?.dirty || editingForm?.get('editedTitle')?.touched)">
+            <small class="form-text "
+                   *ngIf="editingForm?.get('editedTitle')?.hasError('required') && editingForm?.get('editedTitle')?.touched">title
+              is
+              empty!</small>
+            <small class="form-text "
+                   *ngIf="editingForm?.get('editedTitle')?.hasError('minlength') && editingForm?.get('editedTitle')?.touched">title
+              is to small!</small>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <input type="text" name="editedDescription" id="editedDescription" class="form-control"
+                 [class.is-invalid]="editingForm?.get('editedDescription')?.invalid && editingForm?.get('editedDescription')?.touched"
+                 [class.is-valid]="editingForm?.get('editedDescription')?.valid && editingForm?.get('editedDescription')?.touched"
+                 formControlName="editedDescription">
+          <div *ngIf="editingForm?.get('editedDescription')?.invalid &&
+        editingForm?.get('editedDescription')?.errors &&
+        (editingForm?.get('editedDescription')?.dirty || editingForm?.get('editedDescription')?.touched)">
+            <small class="form-text "
+                   *ngIf="editingForm?.get('editedDescription')?.hasError('required') && editingForm?.get('editedDescription')?.touched">title
+              is
+              empty!</small>
+            <small class="form-text "
+                   *ngIf="editingForm?.get('editedDescription')?.hasError('minlength') && editingForm?.get('editedDescription')?.touched">title
+              is to small!</small>
+          </div>
+        </div>
+
+      </div>
+
+      <button type="submit" class="btn btn-info ml-3" [disabled]="!editingForm?.valid">Save</button>
+
+    </form>
   </div>
 </ng-template>
