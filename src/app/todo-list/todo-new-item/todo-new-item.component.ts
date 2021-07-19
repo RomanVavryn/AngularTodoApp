@@ -22,7 +22,7 @@ export class TodoNewItemComponent implements OnInit {
 
   addNewTask(): void {
     const newTask = {
-      id: this.taskService.getLastId() === 1 ? this.taskService.getLastId() : this.taskService.getLastId() + 1,
+      id: this.taskService.getLastId() + 1,
       title: this.newTaskForm?.get('taskTitle')?.value,
       description: this.newTaskForm?.get('taskDescription')?.value,
       done: false

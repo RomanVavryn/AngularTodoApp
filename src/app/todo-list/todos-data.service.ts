@@ -21,10 +21,10 @@ export class TodosDataService {
   }
 
   getLastId(): number {
-    if (this.todos.length >= 1) {
-      return 1
+    if (!this.todos.length) {
+      return 0;
     } else {
-      return <number>this.todos[this.todos.length - 1].id
+      return <number>this.todos[this.todos.length - 1].id;
     }
   }
 
