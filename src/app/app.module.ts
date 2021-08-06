@@ -9,7 +9,7 @@ import {Page404Component} from './page404/page404.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TodoItemComponent} from './todo-list/todo-item/todo-item.component';
 import {TodoNewItemComponent} from './todo-list/todo-new-item/todo-new-item.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,7 +24,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         BrowserModule,
         AppRoutingModule,
         NgbModule,
-        FormsModule,
         ReactiveFormsModule
     ],
   providers: [],

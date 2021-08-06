@@ -8,7 +8,7 @@
   <!-- status -->
   <div class="d-flex flex-column align-items-center ml-auto">
     <span class="mb-2"> Done:</span>
-    <input type="checkbox" class="checkbox-big-size" (click)="taskDone()">
+    <input type="checkbox" class="checkbox-big-size" [checked]="todoItem?.done" (click)="taskDone()">
   </div>
   <!-- btn,s -->
   <button class="btn btn-info ml-4"
@@ -17,30 +17,7 @@
   </button>
   <button class="btn btn-danger ml-2" (click)="deleteTask()">Delete</button>
 </div>
-<!-- edit mode old version -->
-<!--<ng-template #editTask>-->
-<!--  <div class="border p-2 mb-2 d-flex ">-->
-<!--    <div class="d-flex flex-column w-50">-->
-<!--      <input class="mb-2 form-control"-->
-<!--             type="text"-->
-<!--             [(ngModel)]="editedTitle"-->
-<!--             [value]="todoItem?.title"-->
-<!--             (input)="canSaveChanges()">-->
-<!--      <input class="form-control"-->
-<!--             type="text"-->
-<!--             [(ngModel)]="editedDescription"-->
-<!--             [value]="todoItem?.description"-->
-<!--             (input)="canSaveChanges()">-->
-<!--    </div>-->
-<!--    <button class="btn btn-info ml-3"-->
-<!--            (click)="saveChanges()"-->
-<!--            [disabled]="!CanSave">Save-->
-<!--    </button>-->
-<!--  </div>-->
-<!--</ng-template>-->
 
-
-<!-- edit mode reactive form version -->
 <ng-template #editTask>
   <div class="border p-2 mb-2">
     <form [formGroup]="editingForm!" (ngSubmit)="saveChanges()" class="d-flex">

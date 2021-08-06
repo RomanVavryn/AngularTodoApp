@@ -11,10 +11,12 @@
         newTaskForm?.get('taskTitle')?.errors &&
         (newTaskForm?.get('taskTitle')?.dirty || newTaskForm?.get('taskTitle')?.touched)">
       <small class="form-text "
-             *ngIf="newTaskForm?.get('taskTitle')?.hasError('required') && newTaskForm?.get('taskTitle')?.touched">title is
+             *ngIf="newTaskForm?.get('taskTitle')?.hasError('required') && newTaskForm?.get('taskTitle')?.touched">title
+        is
         empty!</small>
       <small class="form-text "
-             *ngIf="newTaskForm?.get('taskTitle')?.hasError('minlength') && newTaskForm?.get('taskTitle')?.touched">title is to small!</small>
+             *ngIf="newTaskForm?.get('taskTitle')?.hasError('minlength') && newTaskForm?.get('taskTitle')?.touched">title
+        is to small!</small>
     </div>
   </div>
 
@@ -28,10 +30,12 @@
         newTaskForm?.get('taskDescription')?.errors &&
         (newTaskForm?.get('taskDescription')?.dirty || newTaskForm?.get('taskDescription')?.touched)">
       <small class="form-text"
-             *ngIf="newTaskForm?.get('taskDescription')?.hasError('required') && newTaskForm?.get('taskDescription')?.touched">description is
+             *ngIf="newTaskForm?.get('taskDescription')?.hasError('required') && newTaskForm?.get('taskDescription')?.touched">description
+        is
         empty!</small>
       <small class="form-text"
-             *ngIf="newTaskForm?.get('taskDescription')?.hasError('minlength') && newTaskForm?.get('taskDescription')?.touched">description is to small!</small>
+             *ngIf="newTaskForm?.get('taskDescription')?.hasError('minlength') && newTaskForm?.get('taskDescription')?.touched">description
+        is to small!</small>
     </div>
   </div>
 
