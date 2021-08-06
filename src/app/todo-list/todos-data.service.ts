@@ -7,14 +7,11 @@ import {TodosDataInterface} from "./todos-data.interface";
 export class TodosDataService {
   todos: TodosDataInterface[] = [
     {id: 1, title: 'todo title', description: 'do something', done: false},
-    {id: 2, title: 'todo app', description: 'finish todo app', done: false},
-    {id: 3, title: 'todo app 2', description: 'finish todo app', done: false},
-    {id: 4, title: 'todo app 3', description: 'finish todo app', done: false},
-    {id: 5, title: 'todo app 4', description: 'finish todo app', done: false},
+    {id: 2, title: 'todo example 1', description: 'todo example 1', done: false},
+    {id: 3, title: 'todo example 2', description: 'todo example 2', done: true},
+    {id: 4, title: 'todo example 3', description: 'todo example 3', done: false},
+    {id: 5, title: 'todo example 4', description: 'todo example 4', done: true},
   ]
-
-  constructor() {
-  }
 
   getTodos(): TodosDataInterface[] {
     return this.todos
@@ -29,8 +26,7 @@ export class TodosDataService {
   }
 
   taskToDone(index: number | undefined): void {
-    // @ts-ignore
-    this.todos[index].done = !this.todos[index].done;
+    this.todos[index!].done = !this.todos[index!].done;
   }
 
   deleteTask(index: number | undefined): void {
